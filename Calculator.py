@@ -19,23 +19,44 @@ logo = """
 def add (n1, n2):
     return n1 + n2
 def subtract (n1, n2):
-    return n1 + n2
+    return n1 - n2
 def multiply(n1, n2):
     return n1 * n2
 def divide(n1, n2):
     return n1 / n2
 
-operators = {
-    "+": add,
-    "-": subtract,
-    "*": multiply,
-    "/": divide
-}
+def Calculator():
+    num1 = float(input("What is your First Number?: "))
+    should_continues = True
 
-num1 = float(input("What is your First Number?: "))
-for op in operators:
-    print(op)
-cal_need = input("Pick a operations: ")
-num2 = float(input("enter your second number: "))
+    while should_continues:
+        operators = {
+            "+": add,
+            "-": subtract,
+            "*": multiply,
+            "/": divide
+        }
 
-print(operators[cal_need](num1, num2))
+        for op in operators:
+            print(op)
+        cal_need = input("Pick a operations: ")
+        num2 = float(input("enter your second number: "))
+
+        results = operators[cal_need](num1, num2)
+        print(f"{num1} {cal_need} {num2} = {results}")
+
+        continue_operations = input(f"Type 'y', if you want to continue operations with {results}, otherwise type 'n': ")
+
+        if continue_operations == 'y':
+            num1 = results
+        else:
+            should_continues = False
+            print("\n" * 100)
+            next_work = input("If youn want to continue new calculation type, 'y', otherwise type 'n': ")
+            if next_work == 'y':
+                Calculator()
+            else:
+                print("Thank You")
+
+
+Calculator()
